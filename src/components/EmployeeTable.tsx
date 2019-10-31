@@ -78,7 +78,14 @@ const EmployeeTable: React.SFC = () => {
     </thead>
   );
 
-  const onDelete = (id: number) => {};
+  const onDelete = async (id: number) => {
+    let res = await fetch(`http://localhost:8080/api/employees?id=${id}`, {
+      method: "DELETE"
+    });
+    console.log("res", res);
+    let employeeList = await res.json();
+    setEmployees(employeeList);
+  };
   return (
     <table className="table">
       {getTableHead()}
